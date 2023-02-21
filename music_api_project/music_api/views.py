@@ -7,9 +7,10 @@ from .models import SongModel
 
 @api_view(['GET',])
 def song_list(request):
-
-    if request.method == 'GET':
-         song = SongModel.objects.all()
+         
+    song = SongModel.objects.all()
+    serializer = SongModelSerializer(song, many = True)
+    return Response(serializer.data)
          
          
 
