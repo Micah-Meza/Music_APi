@@ -28,7 +28,11 @@ def song_detail(request, pk):
         serializer = SongModelSerializer(song)
         return Response(serializer.data, status = status.HTTP_200_OK)
 
-
+    elif request.method == 'PUT':
+        serializer = SongModelSerializer(song, data = request.data)
+        serializer.is_valid(raise_exception = True)
+        serializer.save()
+        return Response(serializer.data, status = status.HTTP_200_OK)
 
 
 
